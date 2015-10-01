@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputHistory: UILabel!
     
     var userMiddleOfTypingNumber = false
+    var brain = CalculatorBrain()
     var hasDecimal = false
     
     @IBAction func appendDigit(sender: UIButton) {
@@ -35,33 +36,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearButton(sender: UIButton) {
-        operandStack.removeAll()
+        brain.removeAll()
         display.text = "0"
         userMiddleOfTypingNumber = false
         inputHistory.text = ""
     }
     @IBAction func operate(sender: UIButton) {
-        if checkDoubleOperation(sender.currentTitle!) && operandStack.count > 1{
-            inputHistory.text = inputHistory.text! + " " + sender.currentTitle!
-        }
-        
         if userMiddleOfTypingNumber{
             enter()
         }
         if let operation = sender.currentTitle{
-            switch operation {
-            case "×": performOperation{ $0 * $1}
-            case "÷": performOperation{ $1 / $0}
-            case "+": performOperation{ $0 + $1}
-            case "−": performOperation{ $1 - $0}
-            case "√" : performOperation { sqrt($0)}
-                    stackHasValues(operation)
-            case "sin": performOperation{ sin($0) }
-                      stackHasValues(operation)
-            case "cos": performOperation{ cos($0) }
-                      stackHasValues(operation)
-                
-            default: break
+            if let result = brain.performOperation(operation){
+                displayValue = result
+            }
+            else{
+                displayValue = 0
+            }
+            if let inputHistoryVal = brain.destHistory {
+                inputHistory.text = inputHistoryVal + "="
             }
         }
     }
@@ -74,54 +66,25 @@ class ViewController: UIViewController {
         }
     }
     
-    func checkDoubleOperation(operation: String) -> Bool{
-        if operation == "×" || operation == "+" ||
-                        operation == "−" || operation == "÷"{
-            return true
-        }
-        return false
-    }
-    
-    func stackHasValues(operation: String){
-        if( operandStack.count > 0){
-                inputHistory.text = inputHistory.text! + " " + operation
-        }
-    }
-    
-    
-    func performOperation(operation: (Double,Double) -> Double){
-        if operandStack.count >= 2 {
-            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            enter()
-        }
-    }
-  
-    private func performOperation(operation: Double -> Double) {
-        if operandStack.count >= 1 {
-            displayValue = operation(operandStack.removeLast())
-            enter()
-        }
-    }
-    
-    var operandStack = Array<Double>()
-
     @IBAction func enter() {
         userMiddleOfTypingNumber = false
-        operandStack.append(displayValue)
-        print("operandStack = \(operandStack)")
+        if let result = brain.pushOperand(displayValue!){
+            displayValue = result
+        }else{
+            
+        }
     }
     
-    var displayValue: Double {
+    var displayValue: Double?{
         get{
-            if(display.text! == "π"){
-                return M_PI
-            }
-            else{
-                return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
-            }
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
         }
         set{
-            display.text = "\(newValue)"
+            if let newValues = newValue {
+                display.text = "\(newValues)"
+            }else{
+                display.text = "Error!"
+            }
             userMiddleOfTypingNumber = false
         }
     }

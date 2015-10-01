@@ -13,6 +13,7 @@
 		3073F5CB1BA65CDC00848D31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3073F5CA1BA65CDC00848D31 /* Images.xcassets */; };
 		3073F5CE1BA65CDC00848D31 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3073F5CC1BA65CDC00848D31 /* LaunchScreen.xib */; };
 		3073F5DA1BA65CDC00848D31 /* assignment1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3073F5D91BA65CDC00848D31 /* assignment1Tests.swift */; };
+		30753DAC1BAF83F200E98491 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30753DAB1BAF83F200E98491 /* CalculatorBrain.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		3073F5D31BA65CDC00848D31 /* assignment1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = assignment1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3073F5D81BA65CDC00848D31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3073F5D91BA65CDC00848D31 /* assignment1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assignment1Tests.swift; sourceTree = "<group>"; };
+		30753DAB1BAF83F200E98491 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				3073F5C31BA65CDC00848D31 /* AppDelegate.swift */,
 				3073F5C51BA65CDC00848D31 /* ViewController.swift */,
+				30753DAB1BAF83F200E98491 /* CalculatorBrain.swift */,
 				3073F5C71BA65CDC00848D31 /* Main.storyboard */,
 				3073F5CA1BA65CDC00848D31 /* Images.xcassets */,
 				3073F5CC1BA65CDC00848D31 /* LaunchScreen.xib */,
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30753DAC1BAF83F200E98491 /* CalculatorBrain.swift in Sources */,
 				3073F5C61BA65CDC00848D31 /* ViewController.swift in Sources */,
 				3073F5C41BA65CDC00848D31 /* AppDelegate.swift in Sources */,
 			);
