@@ -25,14 +25,36 @@ class ViewController: UIViewController {
             if( digit == "." && currentText.rangeOfString(".") == nil &&
                 currentText.rangeOfString("π") == nil || digit != "." && digit != "π"){
                 display.text = display.text! + digit
-                inputHistory.text = inputHistory.text! + digit
             }
         }
         else {
             checkIfPi(digit)
-            inputHistory.text = inputHistory.text! + " " + digit
             userMiddleOfTypingNumber = true
         }
+    }
+    
+    @IBAction func mVariable(sender: UIButton) {
+        if let solution = brain.pushOperand("M"){
+            displayValue = solution
+        }
+        else{
+            inputHistory.text = "\(displayValue!)" + " M "
+        }
+    }
+    
+    @IBAction func setMVariable(sender: UIButton) {
+  
+        if let value = displayValue{
+            if let result = brain.setMVariable(value){
+                displayValue = result
+            }
+        }
+        
+        if let inputHis = brain.destHistory{
+            inputHistory.text! = inputHis
+        }
+        
+        userMiddleOfTypingNumber = false
     }
     
     @IBAction func clearButton(sender: UIButton) {
@@ -70,6 +92,9 @@ class ViewController: UIViewController {
         userMiddleOfTypingNumber = false
         if let result = brain.pushOperand(displayValue!){
             displayValue = result
+            if let inputHistoryVal = brain.destHistory {
+                inputHistory.text = inputHistoryVal
+            }
         }else{
             
         }

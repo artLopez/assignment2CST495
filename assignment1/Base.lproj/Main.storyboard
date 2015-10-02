@@ -242,6 +242,9 @@ Unicode: U+23CE, UTF-8: E2 8F 8E</string>
                                 <state key="normal" title="M">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="mVariable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bRY-L2-YQx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sqy-tU-znP">
                                 <rect key="frame" x="245" y="499" width="109" height="97"/>
@@ -250,7 +253,7 @@ Unicode: U+23CE, UTF-8: E2 8F 8E</string>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="appendDigit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TEY-jT-w4a"/>
+                                    <action selector="setMVariable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DJa-mM-2Fk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHE-ak-Vqc">

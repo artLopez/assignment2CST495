@@ -53,7 +53,7 @@ class CalculatorBrain {
         knowOps["√"]   = Op.UnaryOperation("√", sqrt)
         knowOps["sin"] = Op.UnaryOperation("sin"){ sin($0)}
         knowOps["cos"] = Op.UnaryOperation("cos"){ cos( $0 )}
-        knowOps["π"] = Op.UnaryOperation("π"){ $0 * 3.14159}
+        knowOps["π"]   = Op.UnaryOperation("π"){ M_PI * $0 }
     }
     
     private func descriptionHistory(ops: [Op]) -> ( result: String?, remainingOps: [Op]){
@@ -81,17 +81,19 @@ class CalculatorBrain {
                 }
             case .Variable(let variable):
                 if let varVal = knowOps[variable]{
-                     return("(\(varVal)", remainingOps)
+                     return("\(varVal)", remainingOps)
                 }
                 else{
-                    return(nil, remainingOps)
+                    return("\(variable)", remainingOps)
                 }
             default:
-                return (nil,ops)
+                return(nil,remainingOps)
+
             }
-        }
+          }
         return (nil,ops)
     }
+   
         
     private func evaluate(ops: [Op]) -> ( result: Double?, remainingOps: [Op]){
         
@@ -116,8 +118,8 @@ class CalculatorBrain {
                 }
             case .Variable(let variable):
                 if let varVal = knowOps[variable]{
-                    let string = NSString(string: varVal.description)
-                    return(string.doubleValue, remainingOps)
+                    let varValStr = NSString(string: varVal.description)
+                    return(varValStr.doubleValue, remainingOps)
                 }
                 else{
                     return(nil, remainingOps)
@@ -128,6 +130,8 @@ class CalculatorBrain {
         }
         return (nil,ops)
     }
+    
+    
         
     func evaluate() -> Double?{
         let (result, remainder) = evaluate(opStack)
@@ -152,8 +156,14 @@ class CalculatorBrain {
         return evaluate()
     }
     
+    func setMVariable(valueOfM: Double) -> Double?{
+        variablesValues["M"] = valueOfM
+        return evaluate()
+    }
+    
     func removeAll(){
         opStack.removeAll()
+        variablesValues.removeValueForKey("M")
     }
     
     func count() -> Int {
